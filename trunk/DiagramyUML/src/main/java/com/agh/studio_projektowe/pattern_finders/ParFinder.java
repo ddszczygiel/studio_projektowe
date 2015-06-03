@@ -41,10 +41,17 @@ public class ParFinder implements Finder {
             return false;
         }
 
-        ComplexNode complexNode = new ComplexNode(LTLPatternType.PAR);
+        ComplexNode complexNode = new ComplexNode(getType());
         CommonOperations.prepareActualParamsArray(complexNode.getActualParams(), startNode, first, second);
+        CommonOperations.replaceParentConnections(startNode, complexNode);
+        CommonOperations.replaceChildConnections(possibleJoin, complexNode);
 
         return true;
+    }
+
+    @Override
+    public LTLPatternType getType() {
+        return LTLPatternType.PAR;
     }
 
 }

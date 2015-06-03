@@ -13,6 +13,11 @@ public final class CommonOperations {
         return (node.getOut().size() == count);
     }
 
+    public static boolean validateInConnectionsCount(Node node, int count) {
+
+        return (node.getIn().size() == count);
+    }
+
     public static void replaceParentConnections(Node begin, Node replacement) {
 
         String beginName = begin.getName();

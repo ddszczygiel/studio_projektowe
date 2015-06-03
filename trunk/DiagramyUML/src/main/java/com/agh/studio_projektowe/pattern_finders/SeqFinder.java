@@ -21,7 +21,7 @@ public class SeqFinder implements Finder {
             return false;
         }
 
-        ComplexNode complexNode = new ComplexNode(LTLPatternType.SEQ);
+        ComplexNode complexNode = new ComplexNode(getType());
         CommonOperations.prepareActualParamsArray(complexNode.getActualParams(), startNode, nextElement);
 
         // replace all references to startNode in all Nodes present on its IN list with complexNode
@@ -32,6 +32,11 @@ public class SeqFinder implements Finder {
         CommonOperations.replaceChildConnections(nextElement, complexNode);
 
         return true;
+    }
+
+    @Override
+    public LTLPatternType getType() {
+        return LTLPatternType.SEQ;
     }
 
     public static void main(String[] args) {
