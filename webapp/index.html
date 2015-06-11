@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+
+    <title>UML 2 LTL</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <script src="main.js"></script>
+    
+  </head>
+  <body onload="init()">
+
+    <h1>Generowanie specyfikacji logicznej z diagramów UML</h1>
+
+    <ul id="tabs"> 
+      <li><a href="#model">Model</a></li>
+      <li><a href="#ltl">LTL dla wzorców</a></li>
+      <li><a href="#generate">Generowanie logiki</a></li>
+      <div class="help"><a href="res/documentation.pdf">Pomoc</a></div>
+    </ul>
+
+    <div class="tabContent" id="model">
+      <h2>Wczytaj plik zawierający diagram aktywności</h2>
+      <div>
+          
+	  <p>Wczytaj plik</p>
+
+          <!----WIP----
+
+          <form action="upload.js" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >
+            Diagram aktywności w formacie XML: <input name="myfile" type="file" />
+          <input type="submit" name="submitBtn" value="Wczytaj" />
+          </form>
+          <p id="f1_upload_process">Wczytuję...<br/><img src="res/loader.gif" /></p>
+          <p id="result"></p>
+          <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
+       
+          ----WIP---->
+          
+          <p>Pokaż scenariusz</p>
+      </div>
+    </div>
+
+    <div class="tabContent" id="ltl">
+      <h2>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców</h2>
+      <div>
+        <p>Wczytaj plik</p>
+        <p>Wyświetl</p>
+      </div>
+    </div>
+
+    <div class="tabContent" id="generate">
+      <h2>Generowanie logiki</h2>
+      <div>
+        <p>Znaleziony wzorzec</p>
+        <p>Plik wynikowy</p>
+      </div>
+    </div>
+    
+  </body>
+</html>
