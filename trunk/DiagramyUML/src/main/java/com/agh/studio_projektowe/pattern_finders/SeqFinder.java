@@ -5,8 +5,10 @@ import com.agh.studio_projektowe.model.ComplexNode;
 import com.agh.studio_projektowe.model.LTLPatternType;
 import com.agh.studio_projektowe.model.Node;
 import com.agh.studio_projektowe.model.NodeType;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class SeqFinder implements Finder {
 
     @Override

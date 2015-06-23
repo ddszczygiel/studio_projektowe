@@ -1,8 +1,6 @@
 package com.agh.studio_projektowe.model;
 
 
-import com.agh.studio_projektowe.util.LTLPatternTypeComparator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.TreeMap;
 
 public class LTLPattern {
 
-    private static Map<LTLPatternType, LTLPattern> patterns = new TreeMap<>(new LTLPatternTypeComparator());
+    private static Map<LTLPatternType, LTLPattern> patterns = new TreeMap<>();
 
     private LTLPatternType type;
     private String[] params;
