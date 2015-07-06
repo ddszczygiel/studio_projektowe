@@ -17,20 +17,21 @@ public class LoopFinder implements Finder {
             return false;
         }
 
-        Node possibleDecision = startNode.getOut().get(0);
-        if ((possibleDecision.getType() != NodeType.DECISION_NODE) ||
-             CommonOperations.validateOutConnectionsCount(possibleDecision, 2)  ||
-             CommonOperations.validateInConnectionsCount(possibleDecision, 2)) {
+        Node decisionNode = startNode.getOut().get(0);
+        if ((decisionNode.getType() != NodeType.DECISION_NODE) ||
+             !CommonOperations.validateOutConnectionsCount(decisionNode, 2)  ||
+             !CommonOperations.validateInConnectionsCount(decisionNode, 2)) {
             return false;
         }
 
         Node loopOperationNode = null;
-        Node endNode = null;
-        for (Node out : possibleDecision.getOut()) {
-            if ((out.getSpecificOutNodeIndex(possibleDecision.getName()) != -1) && out.isRegularNode()) {
+        Node outNode = null;
+        for (Node out : decisionNode.getOut()) {
+            // there are only 2 out connections so one should be operation node and second out node
+            if ((out.getSpecificOutNodeIndex(decisionNode.getName()) != -1) && out.isRegularNode()) {
                 loopOperationNode = out;
             } else {
-                endNode = out;
+                outNode = out;
             }
         }
 
@@ -39,9 +40,14 @@ public class LoopFinder implements Finder {
         }
 
         ComplexNode complexNode = new ComplexNode(getType());
-        CommonOperations.prepareActualParamsArray(complexNode.getActualParams(), startNode, possibleDecision, loopOperationNode);
+        CommonOperations.prepareActualParamsArray(complexNode.getActualParams(), startNode, decisionNode, loopOperationNode);
         CommonOperations.replaceParentConnections(startNode, complexNode);
-        CommonOperations.replaceChildConnections(endNode, complexNode);
+//        THAT WONT WORK BECAUSE OF 2 OUT CONNECTIONS FROM DECISION NODE !!!
+//        CommonOperations.replaceChildConnections(decisionNode, complexNode);
+        int pos = outNode.getSpecificInNodeIndex(decisionNode.getName());
+        outNode.getIn().remove(pos);
+        outNode.getIn().add(complexNode);
+        complexNode.getOut().add(outNode);
 
         return true;
     }

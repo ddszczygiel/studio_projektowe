@@ -19,7 +19,7 @@ public class SeqFinder implements Finder {
         }
 
         Node nextElement = startNode.getOut().get(0);
-        if (!CommonOperations.validateOutConnectionsCount(nextElement, 1) && (!nextElement.isRegularNode()))  {
+        if ((nextElement.getOut().size() > 1) || (!nextElement.isRegularNode()))  {
             return false;
         }
 

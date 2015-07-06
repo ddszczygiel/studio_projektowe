@@ -23,6 +23,7 @@ public class ComplexNode extends Node {
         return pattern;
     }
 
+    @Override
     public boolean isRegularNode() {
         return true;
     }

@@ -3,8 +3,14 @@ package com.agh.studio_projektowe;
 
 import com.agh.studio_projektowe.model.ActivityDiagram;
 import com.agh.studio_projektowe.model.Node;
+import com.agh.studio_projektowe.model.NodeType;
 import com.agh.studio_projektowe.parser.ActivityDiagramParser;
+import com.agh.studio_projektowe.pattern_finders.DecFinder;
 import com.agh.studio_projektowe.pattern_finders.Finder;
+import com.agh.studio_projektowe.pattern_finders.LoopFinder;
+import com.agh.studio_projektowe.pattern_finders.ParFinder;
+import com.agh.studio_projektowe.pattern_finders.SeqFinder;
+import com.agh.studio_projektowe.pattern_finders.SeqSeqFinder;
 import com.agh.studio_projektowe.services.ActivityDiagramProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,17 +35,50 @@ public class TestClass {
 
         ActivityDiagramParser parser = new ActivityDiagramParser();
 //        Long start = System.currentTimeMillis();
-        parser.parse("./resources/ex1.xml");
+        parser.parse("./resources/ee1.xml");
 //        Long stop = System.currentTimeMillis();
 //        System.out.println(stop-start);
 //
-//
+        LoopFinder loopFinder = (LoopFinder) applicationContext.getBean("loopFinder");
+        ParFinder parFinder = (ParFinder) applicationContext.getBean("parFinder");
+        SeqSeqFinder seqSeqFinder = (SeqSeqFinder) applicationContext.getBean("seqSeqFinder");
+        DecFinder decFinder = (DecFinder) applicationContext.getBean("decFinder");
+        SeqFinder seqFinder = (SeqFinder) applicationContext.getBean("seqFinder");
+
         ActivityDiagram activityDiagram = new ActivityDiagram(parser.getNodes(), parser.getRelations());
-//        List<Node> nodes = activityDiagram.getNodes();
+        List<Node> nodes = activityDiagram.getNodes();
+
+//        for (Node n : nodes) {
+//            System.out.println(n);
+//        }
+//        for (Node node : processor.getActualTreeElements(activityDiagram.getInitialNode())) {
+//            System.out.println(node);
+//        }
+//        Node start = nodes.get(0);
+//        Node d = nodes.get(8);
+//        Node dec1 = n);
+//        Nodeodes.get(2);
+//        Node c = nodes.get(7);
+//        Node a = nodes.get(1);
+//        Node handle = new Node(NodeType.COMPLEX_NODE, "", "");
+//        handle.getOut().add(start);
 //
-////        for (Node n : nodes) {
-////            System.out.println(n);
-////        }
+////
+//        System.out.println("dupa");
+//        int i =0;
+//        while (i < nodes.size()) {
+//            boolean result = loopFinder.find(nodes.get(i));
+//            System.out.println(result);
+//            i++;
+//            if (result) break;
+//        }
+//        System.out.println(loopFinder.find(d));
+//        System.out.println(parFinder.find(b));
+//        System.out.println(seqFinder.find(c));
+//        System.out.println(decFinder.find(dec1));
+//        System.out.println(seqSeqFinder.find(a));
+//        System.out.println(seqFinder.find(start));
+//        System.out.println("dupa");
 //
 //
 //        Queue<Node> queue = new LinkedList<>();
@@ -53,7 +92,11 @@ public class TestClass {
 //            }
 //        }
 //    }
-
+//        System.out.println("AFTER \n \n \n");
+//        for (Node node : processor.getActualTreeElements(activityDiagram.getInitialNode())) {
+//            System.out.println(node);
+//        }
+//
         processor.processActivityDiagram(activityDiagram);
         System.out.println("end");
 

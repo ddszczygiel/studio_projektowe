@@ -20,11 +20,11 @@ public class DecFinder implements Finder {
         Node node1 = startNode.getOut().get(0);
         Node node2 = startNode.getOut().get(1);
 
-        if (!CommonOperations.validateOutConnectionsCount(node1, 1) || (!startNode.isRegularNode())) {
+        if (!CommonOperations.validateOutConnectionsCount(node1, 1) || (!node1.isRegularNode())) {
             return false;
         }
 
-        if (!CommonOperations.validateOutConnectionsCount(node2, 1) || (!startNode.isRegularNode())) {
+        if (!CommonOperations.validateOutConnectionsCount(node2, 1) || (!node2.isRegularNode())) {
             return false;
         }
 
@@ -36,7 +36,16 @@ public class DecFinder implements Finder {
         ComplexNode complexNode = new ComplexNode(getType());
         CommonOperations.prepareActualParamsArray(complexNode.getActualParams(), startNode, node1, node2);
         CommonOperations.replaceParentConnections(startNode, complexNode);
-        CommonOperations.replaceChildConnections(node1.getOut().get(0), complexNode);
+//        WONT WORK BECAUSE TWO OUT NODES
+//        CommonOperations.replaceChildConnections(node1, complexNode);
+//        CommonOperations.replaceChildConnections(node2, complexNode);
+        Node endNode = node1.getOut().get(0);
+        int pos1 = endNode.getSpecificInNodeIndex(node1.getName());
+        endNode.getIn().remove(pos1);
+        int pos2 = endNode.getSpecificInNodeIndex(node2.getName());
+        endNode.getIn().remove(pos2);
+        endNode.getIn().add(complexNode);
+        complexNode.getOut().add(endNode);
 
         return true;
     }
