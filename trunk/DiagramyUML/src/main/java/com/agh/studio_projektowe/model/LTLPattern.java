@@ -41,6 +41,10 @@ public class LTLPattern {
         return logic;
     }
 
+    public LTLPatternType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
 

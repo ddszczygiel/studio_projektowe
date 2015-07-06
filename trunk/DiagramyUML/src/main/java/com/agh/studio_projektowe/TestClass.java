@@ -2,6 +2,7 @@ package com.agh.studio_projektowe;
 
 
 import com.agh.studio_projektowe.model.ActivityDiagram;
+import com.agh.studio_projektowe.model.ComplexNode;
 import com.agh.studio_projektowe.model.Node;
 import com.agh.studio_projektowe.model.NodeType;
 import com.agh.studio_projektowe.parser.ActivityDiagramParser;
@@ -57,7 +58,6 @@ public class TestClass {
 //        Node start = nodes.get(0);
 //        Node d = nodes.get(8);
 //        Node dec1 = n);
-//        Nodeodes.get(2);
 //        Node c = nodes.get(7);
 //        Node a = nodes.get(1);
 //        Node handle = new Node(NodeType.COMPLEX_NODE, "", "");
@@ -98,6 +98,8 @@ public class TestClass {
 //        }
 //
         processor.processActivityDiagram(activityDiagram);
+        ComplexNode handle = (ComplexNode) processor.getInitialNodeHandle().getOut().get(0);
+        System.out.println(handle.getRepresentation());
         System.out.println("end");
 
     }

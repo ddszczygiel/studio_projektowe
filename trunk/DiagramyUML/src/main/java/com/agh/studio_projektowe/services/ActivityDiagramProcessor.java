@@ -59,14 +59,15 @@ public class ActivityDiagramProcessor {
 
         while (initialNodeHandle.getOut().get(0).getOut().size() > 0) {
 
-            // TODO tu jest bug bo dwa razy z rzedu wchodze i znajduje loop ktore juz raz zostal podmieniony
             List<Node> treeNodes = getActualTreeElements(initialNodeHandle.getOut().get(0));
             displayNodesList(treeNodes);
 
+            int findersChecked = 0;
             for (Finder finder : finders) {
 
                 boolean found = false;
                 int i = 0;
+                findersChecked++;
                 while (i < treeNodes.size()) {
 
                     Node node = treeNodes.get(i++);
@@ -79,6 +80,11 @@ public class ActivityDiagramProcessor {
 
                 if (found) {
                     break;
+                } else {
+                    if (findersChecked == finders.size()) {
+                        //TODO no match found for every pattern and every node so tree has bad structure !!!!
+                        // TODO probably exception !!!
+                    }
                 }
             }
         }
@@ -88,15 +94,15 @@ public class ActivityDiagramProcessor {
         return initialNodeHandle;
     }
 
-    public List<Node> getActualTreeElements(Node initialNode) {
+    public List<Node> getActualTreeElements(Node startNode) {
 
         Queue<Node> nodeQueue = new LinkedList<>();
         Set<String> processedNodeNames = new HashSet<>();
         List<Node> nodes = new ArrayList<>();
 
-        nodeQueue.add(initialNode);
-        processedNodeNames.add(initialNode.getName());
-        nodes.add(initialNode);
+        nodeQueue.add(startNode);
+        processedNodeNames.add(startNode.getName());
+        nodes.add(startNode);
 
         while (!nodeQueue.isEmpty()) {
 
