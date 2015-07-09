@@ -115,12 +115,4 @@ public class LTLModelsParser {
         return patternList;
     }
 
-    public static void main(String[] args) throws FunctionalException {
-
-        LTLModelsParser parser = new LTLModelsParser();
-        List<LTLPattern> patterns = parser.getPatterns("E:\\projects\\studio_projektowe\\trunk\\DiagramyUML\\resources\\temp_logic.txt");
-        for (LTLPattern pattern : patterns) {
-            System.out.println(pattern);
-        }
-    }
 }

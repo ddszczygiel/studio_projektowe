@@ -5,7 +5,7 @@ f1 => <>f2
 f2 => ~<>f2
 @
 SeqSeq(f1,f2,f3)
-ini= f1 / fin= f37
+ini= f1 / fin= f3
 <>f1 / <>f2 / <>f3
 f1 => <>f2 
 f2 => ~<>f2

@@ -60,7 +60,7 @@ public class ActivityDiagramProcessor {
         while (initialNodeHandle.getOut().get(0).getOut().size() > 0) {
 
             List<Node> treeNodes = getActualTreeElements(initialNodeHandle.getOut().get(0));
-            displayNodesList(treeNodes);
+//            displayNodesList(treeNodes);
 
             int findersChecked = 0;
             for (Finder finder : finders) {

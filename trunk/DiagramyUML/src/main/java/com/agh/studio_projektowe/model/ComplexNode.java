@@ -17,7 +17,12 @@ public class ComplexNode extends Node {
         super(NodeType.COMPLEX_NODE, "", "COMPLEX_NODE_" + counter++);
         pattern = LTLPattern.getLTLPatternByType(patternType); //FIXME - for now it is null because no pattern reading mechanism
         actualParams = new Object[patternType.getInParamsCount()];  // array is already prepared !
-        this.patternType = patternType;
+        this.patternType = patternType;     // fixme to delete
+    }
+
+    // FIXME temporary
+    public LTLPatternType getPatternType() {
+        return patternType;
     }
 
     public Object[] getActualParams() {
@@ -28,6 +33,7 @@ public class ComplexNode extends Node {
         return pattern;
     }
 
+    // FIXME to delete later
     public String getRepresentation() {
 
         StringBuilder builder = new StringBuilder();
@@ -39,17 +45,15 @@ public class ComplexNode extends Node {
         for (Object param : actualParams) {
 
             if (param instanceof String) {
-
                 paramsStrings[i++] = (String) param;
             } else {
-
                 // param is instance of complexNode
                 ComplexNode complexNode = (ComplexNode) param;
                 paramsStrings[i++] = complexNode.getRepresentation();
             }
         }
 
-        builder.append(Joiner.on(',').join(paramsStrings));
+        builder.append(Joiner.on(", ").join(paramsStrings));
         builder.append(")");
 
         return builder.toString();

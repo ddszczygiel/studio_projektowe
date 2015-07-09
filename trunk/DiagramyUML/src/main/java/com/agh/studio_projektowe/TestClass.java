@@ -3,9 +3,11 @@ package com.agh.studio_projektowe;
 
 import com.agh.studio_projektowe.model.ActivityDiagram;
 import com.agh.studio_projektowe.model.ComplexNode;
+import com.agh.studio_projektowe.model.LTLPattern;
 import com.agh.studio_projektowe.model.Node;
 import com.agh.studio_projektowe.model.NodeType;
 import com.agh.studio_projektowe.parser.ActivityDiagramParser;
+import com.agh.studio_projektowe.parser.LTLModelsParser;
 import com.agh.studio_projektowe.pattern_finders.DecFinder;
 import com.agh.studio_projektowe.pattern_finders.Finder;
 import com.agh.studio_projektowe.pattern_finders.LoopFinder;
@@ -13,6 +15,7 @@ import com.agh.studio_projektowe.pattern_finders.ParFinder;
 import com.agh.studio_projektowe.pattern_finders.SeqFinder;
 import com.agh.studio_projektowe.pattern_finders.SeqSeqFinder;
 import com.agh.studio_projektowe.services.ActivityDiagramProcessor;
+import com.agh.studio_projektowe.services.PatternProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,17 +32,16 @@ import java.util.Queue;
 @ComponentScan("com.agh.studio_projektowe")
 public class TestClass {
 
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+    public static void main(String[] args) throws Exception {
 
         ConfigurableApplicationContext applicationContext = SpringApplication.run(TestClass.class, args);
         ActivityDiagramProcessor processor = (ActivityDiagramProcessor) applicationContext.getBean("activityDiagramProcessor");
 
         ActivityDiagramParser parser = new ActivityDiagramParser();
-//        Long start = System.currentTimeMillis();
-        parser.parse("./resources/ee1.xml");
-//        Long stop = System.currentTimeMillis();
-//        System.out.println(stop-start);
-//
+        parser.parse("./resources/ee2.xml");
+        LTLModelsParser parser2 = new LTLModelsParser();
+        List<LTLPattern> patterns = parser2.getPatterns("E:\\projects\\studio_projektowe\\trunk\\DiagramyUML\\resources\\temp_logic.txt");
+
         LoopFinder loopFinder = (LoopFinder) applicationContext.getBean("loopFinder");
         ParFinder parFinder = (ParFinder) applicationContext.getBean("parFinder");
         SeqSeqFinder seqSeqFinder = (SeqSeqFinder) applicationContext.getBean("seqSeqFinder");
@@ -48,6 +50,8 @@ public class TestClass {
 
         ActivityDiagram activityDiagram = new ActivityDiagram(parser.getNodes(), parser.getRelations());
         List<Node> nodes = activityDiagram.getNodes();
+
+        PatternProcessor patternProcessor = (PatternProcessor) applicationContext.getBean("patternProcessor");
 
 //        for (Node n : nodes) {
 //            System.out.println(n);
@@ -99,8 +103,14 @@ public class TestClass {
 //
         processor.processActivityDiagram(activityDiagram);
         ComplexNode handle = (ComplexNode) processor.getInitialNodeHandle().getOut().get(0);
-        System.out.println(handle.getRepresentation());
-        System.out.println("end");
+        System.out.println(patternProcessor.getModelRegularExpression(handle));
+        List<ComplexNode> complexNodes = patternProcessor.getAllComplexNodes(handle);
+        System.out.println("dupa");
+        for (String s : patternProcessor.processComplexNodes(handle)) {
+            System.out.println(s);
+        }
+//        System.out.println(handle.getRepresentation());
+//        System.out.println("end");
 
     }
 }

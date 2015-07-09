@@ -2,13 +2,14 @@ package com.agh.studio_projektowe.model;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class LTLPattern {
 
-    private static Map<LTLPatternType, LTLPattern> patterns = new TreeMap<>();
+    private static Map<LTLPatternType, LTLPattern> patterns = new HashMap<>();
 
     private LTLPatternType type;
     private String[] params;
@@ -17,6 +18,7 @@ public class LTLPattern {
     private String[] logic;
 
     public LTLPattern(LTLPatternType type, String[] params, String ini, String fin, String[] logic) {
+
         this.type = type;
         this.params = params;
         this.ini = ini;
@@ -57,4 +59,6 @@ public class LTLPattern {
 
         return patterns.get(type);
     }
+
+
 }
