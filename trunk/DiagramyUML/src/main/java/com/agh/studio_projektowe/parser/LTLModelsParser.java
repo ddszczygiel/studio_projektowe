@@ -5,6 +5,7 @@ import com.agh.studio_projektowe.error.ErrorType;
 import com.agh.studio_projektowe.error.FunctionalException;
 import com.agh.studio_projektowe.model.LTLPattern;
 import com.agh.studio_projektowe.model.LTLPatternType;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Service
 public class LTLModelsParser {
 
     private static Pattern BEGIN_PATTERN = Pattern.compile("(\\w+)\\((.*?)\\)");

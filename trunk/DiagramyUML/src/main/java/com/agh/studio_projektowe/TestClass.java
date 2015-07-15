@@ -5,11 +5,9 @@ import com.agh.studio_projektowe.model.ActivityDiagram;
 import com.agh.studio_projektowe.model.ComplexNode;
 import com.agh.studio_projektowe.model.LTLPattern;
 import com.agh.studio_projektowe.model.Node;
-import com.agh.studio_projektowe.model.NodeType;
 import com.agh.studio_projektowe.parser.ActivityDiagramParser;
 import com.agh.studio_projektowe.parser.LTLModelsParser;
 import com.agh.studio_projektowe.pattern_finders.DecFinder;
-import com.agh.studio_projektowe.pattern_finders.Finder;
 import com.agh.studio_projektowe.pattern_finders.LoopFinder;
 import com.agh.studio_projektowe.pattern_finders.ParFinder;
 import com.agh.studio_projektowe.pattern_finders.SeqFinder;
@@ -20,13 +18,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 @SpringBootApplication
 @ComponentScan("com.agh.studio_projektowe")
@@ -104,9 +97,7 @@ public class TestClass {
         processor.processActivityDiagram(activityDiagram);
         ComplexNode handle = (ComplexNode) processor.getInitialNodeHandle().getOut().get(0);
         System.out.println(patternProcessor.getModelRegularExpression(handle));
-        List<ComplexNode> complexNodes = patternProcessor.getAllComplexNodes(handle);
-        System.out.println("dupa");
-        for (String s : patternProcessor.processComplexNodes(handle)) {
+        for (String s : patternProcessor.getLogicalSpec(handle)) {
             System.out.println(s);
         }
 //        System.out.println(handle.getRepresentation());

@@ -1,33 +1,52 @@
 package com.agh.studio_projektowe.parser;
 
-
+import com.agh.studio_projektowe.error.ErrorType;
+import com.agh.studio_projektowe.error.FunctionalException;
 import com.agh.studio_projektowe.model.Node;
 import com.agh.studio_projektowe.model.Relation;
+import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-
+@Service
 public class ActivityDiagramParser {
 
     private XMLReader reader;
     private ActivityDiagramHandler handler;
 
-    public ActivityDiagramParser() throws ParserConfigurationException, SAXException {
+    public ActivityDiagramParser() throws FunctionalException {
 
-        reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+        try {
+            reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+        } catch (Exception e) {
+            throw new FunctionalException(ErrorType.SAX_READER_ERROR);
+        }
+
         handler = new ActivityDiagramHandler();
         reader.setContentHandler(handler);
     }
 
-    public void parse(String filePath) throws IOException, SAXException {
-        reader.parse(new InputSource(new FileInputStream(filePath)));
+    public void parse(String filePath) throws FunctionalException {
+
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new FunctionalException(ErrorType.FILE_NOT_EXIST);
+        }
+
+        try {
+            reader.parse(new InputSource(new FileInputStream(file)));
+        } catch (IOException e) {
+            throw new FunctionalException(ErrorType.IO_ERROR);
+        } catch (SAXException e) {
+            throw new FunctionalException(ErrorType.SAX_PARSER_ERROR);
+        }
     }
 
     public List<Node> getNodes() {
@@ -38,13 +57,4 @@ public class ActivityDiagramParser {
         return handler.getRelationList();
     }
 
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-
-        ActivityDiagramParser parser = new ActivityDiagramParser();
-        parser.parse("E:\\projects\\studio_projektowe\\trunk\\DiagramyUML\\resources\\ex1.xml");
-        List<Node> nodes = parser.getNodes();
-        for (Node n : nodes) {
-            System.out.println(n);
-        }
-    }
 }

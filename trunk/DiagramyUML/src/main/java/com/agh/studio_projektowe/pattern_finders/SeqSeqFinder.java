@@ -24,7 +24,7 @@ public class SeqSeqFinder implements Finder {
 
         Node thirdElement = secondElement.getOut().get(0);
         // last element could not have out elements ( for example END_NODE ) !!!! so other condition AND
-//        END ELEMENT CA NOT HAVE MORE THAN ONE INPUT ELEMENTS !!!!
+//        END ELEMENT CAN NOT HAVE MORE THAN ONE INPUT ELEMENTS !!!!
         if ((thirdElement.getOut().size() > 1) || (thirdElement.getIn().size() != 1) || (!thirdElement.isRegularNode()))  {
             return false;
         }

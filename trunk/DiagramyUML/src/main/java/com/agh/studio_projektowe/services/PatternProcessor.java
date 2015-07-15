@@ -25,13 +25,11 @@ public class PatternProcessor {
         for (Object param : node.getActualParams()) {
 
             if (param instanceof String) {
-
                 paramsStrings[i++] = (String) param;
             } else {
-
                 // param is instance of complexNode
                 ComplexNode complexNode = (ComplexNode) param;
-                paramsStrings[i++] = complexNode.getRepresentation();
+                paramsStrings[i++] = getModelRegularExpression(complexNode);
             }
         }
 
@@ -40,28 +38,6 @@ public class PatternProcessor {
 
         return builder.toString();
     }
-
-
-//    public List<String> getLogicalSpecification(ComplexNode node) {
-//
-//        List<String> logicLines = new ArrayList<>();
-//        String[] stringParams = new String[node.getActualParams().length];
-//
-//        int i = 0;
-//        for (Object param : node.getActualParams()) {
-//
-//            if (param instanceof String) {
-//                stringParams[i++] = (String) param;
-//            } else {
-//
-//                // param is instance of complexNode
-//
-//            }
-//        }
-//
-//        return logicLines;
-//    }
-
 
     private void getComplexNodeFromParams(ComplexNode node, List<ComplexNode> allNodes) {
 
@@ -73,7 +49,7 @@ public class PatternProcessor {
         }
     }
 
-    public List<ComplexNode> getAllComplexNodes(ComplexNode startNode) {
+    private List<ComplexNode> getAllComplexNodes(ComplexNode startNode) {
 
         List<ComplexNode> complexNodes = new ArrayList<>();
         getComplexNodeFromParams(startNode, complexNodes);
@@ -82,7 +58,7 @@ public class PatternProcessor {
         return complexNodes;
     }
 
-    public List<String> processComplexNodes(ComplexNode startNode) throws Exception {
+    public List<String> getLogicalSpec(ComplexNode startNode) throws Exception {
 
         List<String> patternLogic = new ArrayList<>();
         List<ComplexNode> complexNodes = getAllComplexNodes(startNode);
@@ -102,13 +78,12 @@ public class PatternProcessor {
                     // param is complexNode that should have benn computed before and be present on map
                     String name = ((ComplexNode) param).getName();
                     String childAlternate = computedNodes.get(name);
-                    if (childAlternate == null) throw new Exception("CO SIE KURWA TUTAJ DZIEJE !!!");
                     actualStringParams[i++] = childAlternate;
                 }
             }
 
             patternLogic.addAll(replaceLogicParams(node, actualStringParams));
-            patternLogic.add("#");
+            patternLogic.add("\n");
             computedNodes.put(node.getName(), getIniFinAlternateString(node, actualStringParams));
         }
 

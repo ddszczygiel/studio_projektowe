@@ -1,8 +1,6 @@
 package com.agh.studio_projektowe.model;
 
 
-import com.google.common.base.Joiner;
-
 public class ComplexNode extends Node {
 
     private static int counter = 1;
@@ -31,32 +29,6 @@ public class ComplexNode extends Node {
 
     public LTLPattern getPattern() {
         return pattern;
-    }
-
-    // FIXME to delete later
-    public String getRepresentation() {
-
-        StringBuilder builder = new StringBuilder();
-        String[] paramsStrings = new String[actualParams.length];
-        builder.append(patternType.toString());
-        builder.append("(");
-
-        int i = 0;
-        for (Object param : actualParams) {
-
-            if (param instanceof String) {
-                paramsStrings[i++] = (String) param;
-            } else {
-                // param is instance of complexNode
-                ComplexNode complexNode = (ComplexNode) param;
-                paramsStrings[i++] = complexNode.getRepresentation();
-            }
-        }
-
-        builder.append(Joiner.on(", ").join(paramsStrings));
-        builder.append(")");
-
-        return builder.toString();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.agh.studio_projektowe.services;
 
+import com.agh.studio_projektowe.error.ErrorType;
+import com.agh.studio_projektowe.error.FunctionalException;
 import com.agh.studio_projektowe.model.ActivityDiagram;
 import com.agh.studio_projektowe.model.ComplexNode;
 import com.agh.studio_projektowe.model.Node;
@@ -39,39 +41,35 @@ public class ActivityDiagramProcessor {
     @PostConstruct
     public void setUp() {
         Collections.sort(finders, new FinderComparator());
-        BasicConfigurator.configure();
+        BasicConfigurator.configure();  //ToDO to delete !!!
     }
 
-    public List<Finder> getFinders() {
-        return finders;
-    }
-
-    public void processActivityDiagram(ActivityDiagram activityDiagram) {
-
-        initialNodeHandle = new Node(NodeType.COMPLEX_NODE, "P", "handle");
+    public void processActivityDiagram(ActivityDiagram activityDiagram) throws FunctionalException {
 
         if (activityDiagram.getInitialNode() == null) {
-            // TODO bad diagram structure !! handle error
-            // probably exception is thrown
+            throw new FunctionalException(ErrorType.BAD_ACTIVITY_DIAGRAM_STRUCTURE);
         }
+
+        initialNodeHandle = new Node(NodeType.COMPLEX_NODE, "P", "handle");
         initialNodeHandle.getOut().add(activityDiagram.getInitialNode());
         activityDiagram.getInitialNode().getIn().add(initialNodeHandle);
 
         while (initialNodeHandle.getOut().get(0).getOut().size() > 0) {
 
             List<Node> treeNodes = getActualTreeElements(initialNodeHandle.getOut().get(0));
-//            displayNodesList(treeNodes);
-
             int findersChecked = 0;
+
             for (Finder finder : finders) {
 
                 boolean found = false;
                 int i = 0;
                 findersChecked++;
+
                 while (i < treeNodes.size()) {
 
                     Node node = treeNodes.get(i++);
                     if (finder.find(node)) {
+
                         LOGGER.debug(String.format("PATTERN: %s FOUND. STARTING NODE NAME: %s", finder.getType(), node.getName()));
                         found = true;
                         break;
@@ -82,8 +80,7 @@ public class ActivityDiagramProcessor {
                     break;
                 } else {
                     if (findersChecked == finders.size()) {
-                        //TODO no match found for every pattern and every node so tree has bad structure !!!!
-                        // TODO probably exception !!!
+                        throw new FunctionalException(ErrorType.UNKNOWN_ACTIVITY_DIAGRAM_STRUCTURE);
                     }
                 }
             }
@@ -94,7 +91,7 @@ public class ActivityDiagramProcessor {
         return initialNodeHandle;
     }
 
-    public List<Node> getActualTreeElements(Node startNode) {
+    private  List<Node> getActualTreeElements(Node startNode) {
 
         Queue<Node> nodeQueue = new LinkedList<>();
         Set<String> processedNodeNames = new HashSet<>();
@@ -121,10 +118,4 @@ public class ActivityDiagramProcessor {
         return nodes;
     }
 
-    private void displayNodesList(List<Node> nodes) {
-
-        for (Node node : nodes) {
-            System.out.println(node);
-        }
-    }
 }
