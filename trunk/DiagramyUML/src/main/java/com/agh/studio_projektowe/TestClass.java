@@ -31,9 +31,9 @@ public class TestClass {
         ActivityDiagramProcessor processor = (ActivityDiagramProcessor) applicationContext.getBean("activityDiagramProcessor");
 
         ActivityDiagramParser parser = new ActivityDiagramParser();
-        parser.parse("./resources/ee2.xml");
-        LTLModelsParser parser2 = new LTLModelsParser();
-        List<LTLPattern> patterns = parser2.getPatterns("E:\\projects\\studio_projektowe\\trunk\\DiagramyUML\\resources\\temp_logic.txt");
+//        parser.parse("./resources/ee2.xml");
+//        LTLModelsParser parser2 = new LTLModelsParser();
+//        List<LTLPattern> patterns = parser2.getPatterns("E:\\projects\\studio_projektowe\\trunk\\DiagramyUML\\resources\\temp_logic.txt");
 
         LoopFinder loopFinder = (LoopFinder) applicationContext.getBean("loopFinder");
         ParFinder parFinder = (ParFinder) applicationContext.getBean("parFinder");

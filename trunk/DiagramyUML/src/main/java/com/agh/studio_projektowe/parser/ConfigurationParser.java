@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,14 +27,16 @@ public class ConfigurationParser {
     private static final Pattern CONF_LINE_PATTERN = Pattern.compile("(\\w+):(\\d)");
 
     // in conf file must be present EXACTLY those patterns which are defined in LTLPattern class
-    public void loadConfig(String filePath) throws FunctionalException {
+    public void loadConfig(InputStream inputStream) throws FunctionalException {
 
-        File file = new File(filePath);
-        if (!file.exists()) {
+
+//        File file = new File(filePath);
+//        if (!file.exists()) {
+        if ( inputStream == null ) {
             throw new FunctionalException(ErrorType.FILE_NOT_EXIST);
         }
 
-        List<String> lines = getLines(file);
+        List<String> lines = getLines(inputStream);
         Map<String, Integer> parsedValues = parseLines(lines);
 
         for (Map.Entry<String, Integer> entry : parsedValues.entrySet()) {
@@ -40,12 +45,12 @@ public class ConfigurationParser {
         }
     }
 
-    private List<String> getLines(File file) throws FunctionalException {
+    private List<String> getLines(InputStream inputStream) throws FunctionalException {
 
         List<String> lines = new ArrayList<>();
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);

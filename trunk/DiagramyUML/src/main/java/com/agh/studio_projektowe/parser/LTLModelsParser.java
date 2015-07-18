@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,12 +24,12 @@ public class LTLModelsParser {
 
     private static Pattern BEGIN_PATTERN = Pattern.compile("(\\w+)\\((.*?)\\)");
 
-    private String getLines(File file) throws FunctionalException {
+    private String getLines(InputStream inputStream) throws FunctionalException {
 
         StringBuilder builder = new StringBuilder();
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line).append('\n');
@@ -99,14 +101,15 @@ public class LTLModelsParser {
         }
     }
 
-    public List<LTLPattern> getPatterns(String filePath) throws FunctionalException {
+    public List<LTLPattern> getPatterns(InputStream inputStream) throws FunctionalException {
 
-        File file = new File(filePath);
-        if (!file.exists()) {
+//        File file = new File(filePath);
+//        if (!file.exists()) {
+        if ( inputStream == null ) {
             throw new FunctionalException(ErrorType.FILE_NOT_EXIST);
         }
 
-        String lines = getLines(file);
+        String lines = getLines(inputStream);
         String[] patterns = lines.split("@");
         List<LTLPattern> patternList = new ArrayList<>();
 
