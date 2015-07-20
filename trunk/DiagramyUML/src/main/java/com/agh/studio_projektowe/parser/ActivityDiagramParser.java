@@ -36,8 +36,6 @@ public class ActivityDiagramParser {
 
     public void parse(InputStream inputStream) throws FunctionalException {
 
-//        File file = new File(filePath);
-//        if (!file.exists()) {
         if ( inputStream == null ) {
             throw new FunctionalException(ErrorType.FILE_NOT_EXIST);
         }

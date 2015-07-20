@@ -41,7 +41,6 @@ public class ActivityDiagramProcessor {
     @PostConstruct
     public void setUp() {
         Collections.sort(finders, new FinderComparator());
-        BasicConfigurator.configure();  //ToDO to delete !!!
     }
 
     public void processActivityDiagram(ActivityDiagram activityDiagram) throws FunctionalException {
@@ -91,7 +90,7 @@ public class ActivityDiagramProcessor {
         return initialNodeHandle;
     }
 
-    private  List<Node> getActualTreeElements(Node startNode) {
+    private List<Node> getActualTreeElements(Node startNode) {
 
         Queue<Node> nodeQueue = new LinkedList<>();
         Set<String> processedNodeNames = new HashSet<>();

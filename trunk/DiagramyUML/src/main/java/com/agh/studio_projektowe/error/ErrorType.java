@@ -12,7 +12,9 @@ public enum ErrorType {
     UNKNOWN_ACTIVITY_DIAGRAM_STRUCTURE("Unknown activity diagram structure (unknown patterns exist)"),
     BAD_ACTIVITY_DIAGRAM_STRUCTURE("Diagram initial node not found"),
     UNKNOWN_CONF_PATTERN("Configuration file contains unknown LTL pattern - default values are used"),
-    MISSING_PATTERN_CONF("Missing configuration for some LTL patterns - default values are used");
+    MISSING_PATTERN_CONF("Missing configuration for some LTL patterns - default values are used"),
+    LTL_MODELS_FILE_MISSING("Missing LTL models configuration file"),
+    ACTIVITY_DIAGRAM_FILE_MISSING("Missing activity diagram file");
 
 
     private final String message;

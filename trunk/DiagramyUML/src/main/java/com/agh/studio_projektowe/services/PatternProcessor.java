@@ -58,7 +58,7 @@ public class PatternProcessor {
         return complexNodes;
     }
 
-    public List<String> getLogicalSpec(ComplexNode startNode) throws Exception {
+    public List<String> getLogicalSpec(ComplexNode startNode) {
 
         List<String> patternLogic = new ArrayList<>();
         List<ComplexNode> complexNodes = getAllComplexNodes(startNode);
