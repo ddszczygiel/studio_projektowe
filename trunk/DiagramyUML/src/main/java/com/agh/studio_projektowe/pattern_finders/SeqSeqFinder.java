@@ -13,7 +13,7 @@ public class SeqSeqFinder implements Finder {
     @Override
     public boolean find(Node startNode) {
 
-        if (!CommonOperations.validateOutConnectionsCount(startNode, 1) || (!startNode.isRegularNode())) {
+        if ((startNode.getIn().size() > 1) || !CommonOperations.validateOutConnectionsCount(startNode, 1) || (!startNode.isRegularNode())) {
             return false;
         }
 

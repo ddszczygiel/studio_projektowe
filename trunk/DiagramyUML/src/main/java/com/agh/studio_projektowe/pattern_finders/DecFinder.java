@@ -28,7 +28,6 @@ public class DecFinder implements Finder {
             return false;
         }
 
-        // FIXME not sure if this is correct !!! - checking if out's of node1 and node2 are linked to the same node ??
         if (node1.getOut().get(0) != node2.getOut().get(0)) {
             return false;
         }

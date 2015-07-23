@@ -14,12 +14,12 @@ public class SeqFinder implements Finder {
     @Override
     public boolean find(Node startNode) {
 
-        if (!CommonOperations.validateOutConnectionsCount(startNode, 1) || (!startNode.isRegularNode())) {
+        if ((startNode.getIn().size() > 1) || !CommonOperations.validateOutConnectionsCount(startNode, 1) || (!startNode.isRegularNode())) {
             return false;
         }
 
         Node nextElement = startNode.getOut().get(0);
-        if ((nextElement.getOut().size() > 1) || (!nextElement.isRegularNode()))  {
+        if ((nextElement.getOut().size() > 1) || (nextElement.getIn().size() != 1) || (!nextElement.isRegularNode()))  {
             return false;
         }
 
