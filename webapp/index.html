@@ -6,13 +6,14 @@
     <title>UML 2 LTL</title>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <script src="main.js"></script>
-    
+    <script src="controlers.js"></script>
+
   </head>
   <body onload="init()">
 
     <h1>Generowanie specyfikacji logicznej z diagramów UML</h1>
 
-    <ul id="tabs"> 
+    <ul id="tabs">
       <li><a href="#model">Model</a></li>
       <li><a href="#ltl">LTL dla wzorców</a></li>
       <li><a href="#generate">Generowanie logiki</a></li>
@@ -20,42 +21,53 @@
     </ul>
 
     <div class="tabContent" id="model">
-      <h2>Wczytaj plik zawierający diagram aktywności</h2>
+      <!-- <h3>Wczytaj diagram aktywności</h3> -->
       <div>
-          
-	  <p>Wczytaj plik</p>
 
-          <!----WIP----
+	       <h3>Wczytaj plik konfiguracyjny:</h3>
+         <input id="sendConf" type="file"/>
+         <input id="addConf" type="button" value="Wczytaj" onclick="sendConf()"/>
+         <br>
+         <h3>Wczytaj plik zawierający model:</h3>
+         <input id="sendActd" type="file"/>
+         <input id="addActd" type="button" value="Wczytaj" onclick="sendActd()"/>
 
-          <form action="upload.js" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >
-            Diagram aktywności w formacie XML: <input name="myfile" type="file" />
-          <input type="submit" name="submitBtn" value="Wczytaj" />
-          </form>
-          <p id="f1_upload_process">Wczytuję...<br/><img src="res/loader.gif" /></p>
-          <p id="result"></p>
-          <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
-       
-          ----WIP---->
-          
-          <p>Pokaż scenariusz</p>
       </div>
     </div>
 
     <div class="tabContent" id="ltl">
-      <h2>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców</h2>
+      <h3>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców</h3>
       <div>
-        <p>Wczytaj plik</p>
-        <p>Wyświetl</p>
+
+        <input id="sendLtl" type="file"/>
+        <input id="addLtl" type="button" value="Wczytaj" onclick="sendLtl()"/>
+        <br>
+
+        <form name="ltlform">
+          <table border="0" cellspacing="0" cellpadding="5"><tr>
+          <td><textarea name="outputltl" id="outputltl"></textarea></td>
+          </tr></table>
+        </form>
+
       </div>
     </div>
 
     <div class="tabContent" id="generate">
-      <h2>Generowanie logiki</h2>
+      <!-- <h3>Generowanie logiki</h3> -->
+      <br>
       <div>
-        <p>Znaleziony wzorzec</p>
-        <p>Plik wynikowy</p>
+
+        <input id="getSpec" type="button" value="Generuj specyfikację logiczną!" onclick="getSpec()"/>
+        <br>
+
+        <form name="specform">
+          <table border="0" cellspacing="0" cellpadding="5" ><tr>
+          <td><textarea name="outputspec" id="outputspec"></textarea></td>
+          </tr></table>
+        </form>
+
       </div>
     </div>
-    
+
   </body>
 </html>
