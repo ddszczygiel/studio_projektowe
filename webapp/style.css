@@ -8,3 +8,5 @@ ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bol
 div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
 div.tabContent.hide { display: none; }
 div.help { text-align: right; display: inline; position: absolute; right: 0;}
+textarea#outputltl  { width: 600px; height: 320px; border: 1px solid #cccccc; padding: 5px; }
+textarea#outputspec { width: 600px; height: 320px; border: 1px solid #cccccc; padding: 5px; }

@@ -55,3 +55,4 @@ function getHash( url ) {
       var hashPos = url.lastIndexOf ( '#' );
       return url.substring( hashPos + 1 );
     }
+    
