@@ -6,12 +6,14 @@
     <title>UML 2 LTL</title>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <script src="main.js"></script>
-    <script src="controlers.js"></script>
-
+ 
   </head>
   <body onload="init()">
 
+  <script src="controlers.js"></script>
+
     <h1>Generowanie specyfikacji logicznej z diagramów UML</h1>
+    <p>Aplikacja generuje specyfikację logiczną oprogramowania na podstawie analizy diagramów aktywności UML według ustalonych wzorców logiki LTL.</p>
 
     <ul id="tabs">
       <li><a href="#model">Model</a></li>
@@ -21,26 +23,31 @@
     </ul>
 
     <div class="tabContent" id="model">
-      <!-- <h3>Wczytaj diagram aktywności</h3> -->
       <div>
 
-	       <h3>Wczytaj plik konfiguracyjny:</h3>
-         <input id="sendConf" type="file"/>
-         <input id="addConf" type="button" value="Wczytaj" onclick="sendConf()"/>
          <br>
-         <h3>Wczytaj plik zawierający model:</h3>
+         <fieldset>
+         <legend>Wczytaj plik konfiguracyjny</legend>
+         <input id="sendConf" type="file"/>
+         <button onclick="sendConf()">Wczytaj</button>
+         </fieldset>
+
+         <br>
+         <fieldset>
+         <legend>Wczytaj plik zawierający model</legend>
          <input id="sendActd" type="file"/>
-         <input id="addActd" type="button" value="Wczytaj" onclick="sendActd()"/>
+         <button onclick="sendActd()">Wczytaj</button>
+         </fieldset>
 
       </div>
     </div>
 
     <div class="tabContent" id="ltl">
-      <h3>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców</h3>
       <div>
-
+        <br>
+        <label>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców:</label>
         <input id="sendLtl" type="file"/>
-        <input id="addLtl" type="button" value="Wczytaj" onclick="sendLtl()"/>
+        <button onclick="sendLtl()">Wczytaj</button>
         <br>
 
         <form name="ltlform">
@@ -53,11 +60,10 @@
     </div>
 
     <div class="tabContent" id="generate">
-      <!-- <h3>Generowanie logiki</h3> -->
       <br>
       <div>
-
-        <input id="getSpec" type="button" value="Generuj specyfikację logiczną!" onclick="getSpec()"/>
+        <label for="fileselect">Specyfikacja logiczna: </label>
+        <button onclick="getSpec()">Wczytaj</button>
         <br>
 
         <form name="specform">

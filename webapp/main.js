@@ -8,8 +8,7 @@ function init() {
         var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
           var id = getHash( tabLink.getAttribute('href') );
           tabLinks[id] = tabLink;
-          contentDivs[id] = document.getElementById( id );
-        }
+          contentDivs[id] = document.getElementById( id );}
       }
 
       var i = 0;
@@ -18,15 +17,13 @@ function init() {
         tabLinks[id].onclick = showTab;
         tabLinks[id].onfocus = function() { this.blur() };
         if ( i == 0 ) tabLinks[id].className = 'selected';
-        i++;
-      }
+        i++;}
 
       var i = 0;
 
       for ( var id in contentDivs ) {
         if ( i != 0 ) contentDivs[id].className = 'tabContent hide';
-        i++;
-      }
+        i++;}
     }
 
 function showTab() {
@@ -35,20 +32,16 @@ function showTab() {
       for ( var id in contentDivs ) {
         if ( id == selectedId ) {
           tabLinks[id].className = 'selected';
-          contentDivs[id].className = 'tabContent';
-        } else {
+          contentDivs[id].className = 'tabContent';} 
+          else {
           tabLinks[id].className = '';
-          contentDivs[id].className = 'tabContent hide';
-        }
-      }
-
+          contentDivs[id].className = 'tabContent hide';}}
       return false;
     }
 
 function getFirstChildWithTagName( element, tagName ) {
       for ( var i = 0; i < element.childNodes.length; i++ ) {
-        if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
-      }
+        if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];}
     }
 
 function getHash( url ) {
