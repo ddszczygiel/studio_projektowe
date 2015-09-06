@@ -52,12 +52,18 @@ public class ActivityDiagramParser {
 
     public List<Node> getNodes() {
 
-        return new ArrayList<>(handler.getNodes());
+        // to prevent modifying originally parsed nodes
+        List<Node> nodesCopy = new ArrayList<>();
+        for (Node node : handler.getNodes()) {
+            nodesCopy.add(new Node(node));
+        }
+
+        return nodesCopy;
     }
 
     public List<Relation> getRelations() {
 
-        return new ArrayList<>(handler.getRelationList());
+        return handler.getRelationList();
     }
 
 }

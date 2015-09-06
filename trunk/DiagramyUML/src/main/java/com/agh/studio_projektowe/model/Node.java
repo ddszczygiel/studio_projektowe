@@ -21,6 +21,11 @@ public class Node {
         in = new ArrayList<>();
     }
 
+    public Node(Node node) {
+
+        this(node.getType(), node.getId(), node.getName());
+    }
+
     public NodeType getType() {
         return type;
     }
