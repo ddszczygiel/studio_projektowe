@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,11 +51,13 @@ public class ActivityDiagramParser {
     }
 
     public List<Node> getNodes() {
-        return handler.getNodes();
+
+        return new ArrayList<>(handler.getNodes());
     }
 
     public List<Relation> getRelations() {
-        return handler.getRelationList();
+
+        return new ArrayList<>(handler.getRelationList());
     }
 
 }
