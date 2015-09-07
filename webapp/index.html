@@ -5,13 +5,13 @@
 
     <title>UML 2 LTL</title>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <!-- <link rel="shortcut icon" type="image/png" href="res/favicon.png"/> -->
     <script src="main.js"></script>
  
   </head>
   <body onload="init()">
 
   <script src="controlers.js"></script>
-
     <h1>Generowanie specyfikacji logicznej z diagramów UML</h1>
     <p>Aplikacja generuje specyfikację logiczną oprogramowania na podstawie analizy diagramów aktywności UML według ustalonych wzorców logiki LTL.</p>
 
@@ -23,22 +23,44 @@
     </ul>
 
     <div class="tabContent" id="model">
-      <div>
+      <div id="files">
 
          <br>
          <fieldset>
          <legend>Wczytaj plik konfiguracyjny</legend>
-         <input id="sendConf" type="file"/>
-         <button onclick="sendConf()">Wczytaj</button>
+         <input id="sendConf" type="file" value="HEJ!"/>
+         <script type="text/javascript">
+          var control = document.getElementById("sendConf");   
+          control.addEventListener("change", function(event){    
+            sendConf();        
+          }, false);
+          </script>
+         <!-- <button onclick="sendConf()">Wczytaj</button> -->
          </fieldset>
 
          <br>
          <fieldset>
          <legend>Wczytaj plik zawierający model</legend>
          <input id="sendActd" type="file"/>
-         <button onclick="sendActd()">Wczytaj</button>
+          <script type="text/javascript">
+          var control = document.getElementById("sendActd");   
+          control.addEventListener("change", function(event){    
+            sendActd();        
+          }, false);
+          </script>
+         <!-- <button onclick="sendActd()">Wczytaj</button> -->
          </fieldset>
 
+      </div>
+      <div id="blank"></div>
+      <div id="info">
+        <fieldset>
+        <legend>Instrukcja</legend>
+        <p>1. Wczytaj plik konfiguracyjny</p>
+        <p>2. Wczytaj plik z modelem diagramu UML</p>
+        <p>3. Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców</p>
+        <p>4. Wygeneruj specyfikację logiczną</p>
+        </fieldset>
       </div>
     </div>
 
@@ -47,12 +69,25 @@
         <br>
         <label>Wczytaj plik ze zdefiniowanymi formułami LTL dla wzorców:</label>
         <input id="sendLtl" type="file"/>
-        <button onclick="sendLtl()">Wczytaj</button>
+        <!-- <button onclick="sendLtl();">Wczytaj</button> -->
+         <script type="text/javascript">
+          var control = document.getElementById("sendLtl");   
+          control.addEventListener("change", function(event){    
+            sendLtl();
+            var reader = new FileReader();    
+
+            reader.onload = function(event){
+              var contents = event.target.result;        
+              document.getElementById('ltlfile').value = contents;            
+         };      
+            console.log("Filename: " + control.files[0].name);
+            reader.readAsText(control.files[0]);        
+     }, false);</script>
         <br>
 
-        <form name="ltlform">
+        <form name="ltl">
           <table border="0" cellspacing="0" cellpadding="5"><tr>
-          <td><textarea name="outputltl" id="outputltl"></textarea></td>
+          <td><textarea name="ltlfile" id="ltlfile"></textarea></td>
           </tr></table>
         </form>
 
@@ -62,17 +97,32 @@
     <div class="tabContent" id="generate">
       <br>
       <div>
-        <label for="fileselect">Specyfikacja logiczna: </label>
-        <button onclick="getSpec()">Wczytaj</button>
-        <br>
+        <label>Specyfikacja logiczna oraz znaleziony wzorzec logiki:</label>
+        <button onclick="getSpec()" id="specButton">Generuj</button>
+   
+          <!-- <fieldset> -->
+          <legend>Znaleziony wzorzec:</legend>
+          <form name="ltlform">
+           <table border="0" cellspacing="0" cellpadding="5"><tr>
+           <td><textarea name="outputltl" id="outputltl"></textarea></td>
+           </tr></table>
+          </form>
+      <!-- </fieldset> -->
 
+   <!-- <fieldset> -->
+         <legend>Plik wynikowy:</legend>
         <form name="specform">
           <table border="0" cellspacing="0" cellpadding="5" ><tr>
           <td><textarea name="outputspec" id="outputspec"></textarea></td>
           </tr></table>
         </form>
+      <!-- </fieldset> -->
 
       </div>
+    </div>
+
+    <div id="footer"><label>&emsp;Status: </label>
+
     </div>
 
   </body>
