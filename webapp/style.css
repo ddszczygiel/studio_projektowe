@@ -1,7 +1,7 @@
 body {font-family: "Segoe UI", Tahoma, Helvetica, freesans, sans-serif; font-size: 80%; margin: 10px; /*color: #333; 
 	background-color: #fff; */
 	padding-bottom:22px;
-  background-image: url(res/geometry2.png);
+  background-image: url(res/retina_wood.png);
   background-repeat:repeat;}
 h1, h2 {font-size: 1.5em; font-weight: normal}
 h2 {font-size: 1.3em;}
@@ -10,7 +10,7 @@ ul#tabs { list-style-type: none; margin: 30px 0 0 0; padding: 0 0 0.3em 0; posit
 ul#tabs li { display: inline; }
 ul#tabs li a { color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; }
 ul#tabs li a:hover { background-color: #f1f0ee; }
-ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
+ul#tabs li a.selected { color: #3d85c6; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
 div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
 div.tabContent.hide { display: none; }
 div.help { text-align: right; display: inline; position: absolute; right: 0;}
@@ -22,17 +22,22 @@ textarea#ltlfile	{ width: 1150px; height: 620px; border: 1px solid #cccccc; padd
 #info {overflow: hidden; width: 33%; height: 300px; }
 #files { float:left; width: 33%;}
 #blank { float:left; width: 33%; border: 1px solid #f1f0ee; padding: 5px; }
-
+/*
+#specButton{
+ddisplay:       inline-block;
+padding:       8px 20px;
+background:    #073763 url('http://dabuttonfactory.com/button.png?w=1&h=29&bgt=gradient&bgc=3d85c6&ebgc=073763') repeat-x;
+background:    -moz-linear-gradient(#3d85c6, #073763);
+background:    -o-linear-gradient(#3d85c6, #073763);
+background:    -webkit-linear-gradient(#3d85c6, #073763);
+background:    linear-gradient(#3d85c6, #073763);
+border-radius: 5px;
+color:         #fff;}*/
 #specButton{
 display:       inline-block;
 padding:       8px 20px;
-background:    #666 url('http://dabuttonfactory.com/button.png?w=1&h=30&bgt=gradient&bgc=ccc&ebgc=666') repeat-x;
-background:    -moz-linear-gradient(#ccc, #666);
-background:    -o-linear-gradient(#ccc, #666);
-background:    -webkit-linear-gradient(#ccc, #666);
-background:    linear-gradient(#ccc, #666);
-border-radius: 5px;
+background:    #3d85c6;
 color:         #fff;
-font:          normal 700 14px/1 "Calibri", sans-serif;
+font:          normal 700 11px/1 "Calibri", sans-serif;
 text-align:    center;
 text-shadow:   1px 1px 0 #000;}
