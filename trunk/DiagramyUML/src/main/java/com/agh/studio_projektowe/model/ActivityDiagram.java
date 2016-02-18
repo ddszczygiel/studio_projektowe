@@ -9,6 +9,7 @@ public class ActivityDiagram {
     private List<Relation> relationList;
 
     public ActivityDiagram(List<Node> nodes, List<Relation> relationList) {
+
         this.nodes = nodes;
         this.relationList = relationList;
         buildDiagram();

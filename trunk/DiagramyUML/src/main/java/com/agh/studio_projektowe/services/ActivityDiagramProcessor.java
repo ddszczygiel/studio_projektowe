@@ -69,7 +69,7 @@ public class ActivityDiagramProcessor {
                     Node node = treeNodes.get(i++);
                     if (finder.find(node)) {
 
-                        LOGGER.debug(String.format("PATTERN: %s FOUND. STARTING NODE NAME: %s", finder.getType(), node.getName()));
+//                        LOGGER.debug(String.format("PATTERN: %s FOUND. STARTING NODE NAME: %s", finder.getType(), node.getName()));
                         found = true;
                         break;
                     }

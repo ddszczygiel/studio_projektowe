@@ -29,7 +29,6 @@ public class ConfigurationParser {
     // in conf file must be present EXACTLY those patterns which are defined in LTLPattern class
     public void loadConfig(InputStream inputStream) throws FunctionalException {
 
-
         if ( inputStream == null ) {
             throw new FunctionalException(ErrorType.FILE_NOT_EXIST);
         }

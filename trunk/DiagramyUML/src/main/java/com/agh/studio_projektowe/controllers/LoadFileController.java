@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/load")
+@RequestMapping(value = "/api/load")
 public class LoadFileController {
 
     @Autowired
@@ -76,7 +76,7 @@ public class LoadFileController {
 
             ltlModelsParser.getPatterns(file.getInputStream());
             fileStatus.setLtlModels(true);
-            responseObject.setPayload(Boolean.TRUE);
+            responseObject.setPayload(ltlModelsParser.getFileContent());
         } catch (FunctionalException e) {
             responseObject.setErrorMessage(e.getMessage());
         } catch (IOException e) {

@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 public class LTLModelsParser {
 
     private static Pattern BEGIN_PATTERN = Pattern.compile("(\\w+)\\((.*?)\\)");
+    private String fileContent;
 
     private String getLines(InputStream inputStream) throws FunctionalException {
 
@@ -108,6 +109,7 @@ public class LTLModelsParser {
         }
 
         String lines = getLines(inputStream);
+        fileContent = lines;
         String[] patterns = lines.split("@");
         List<LTLPattern> patternList = new ArrayList<>();
 
@@ -116,6 +118,11 @@ public class LTLModelsParser {
         }
 
         return patternList;
+    }
+
+    public String getFileContent() {
+
+        return fileContent.replaceAll("\\n|\\n\\r", "<br/>");
     }
 
 }

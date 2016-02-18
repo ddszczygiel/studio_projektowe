@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/data")
+@RequestMapping(value = "/api/data")
 public class AnalyzerControler {
 
     @Autowired
@@ -43,7 +43,7 @@ public class AnalyzerControler {
         }
     }
 
-    @RequestMapping(value = "/ltlpattern", method = RequestMethod.POST)
+    @RequestMapping(value = "/ltlpattern", method = RequestMethod.GET)
     public ResponseObject getLTLPattern() {
 
         ResponseObject responseObject = new ResponseObject();
@@ -62,7 +62,7 @@ public class AnalyzerControler {
         return responseObject;
     }
 
-    @RequestMapping(value = "/ltlspec", method = RequestMethod.POST)
+    @RequestMapping(value = "/ltlspec", method = RequestMethod.GET)
     public ResponseObject getLTLSpec() {
 
         ResponseObject responseObject = new ResponseObject();
